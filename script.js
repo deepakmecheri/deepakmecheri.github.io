@@ -1,6 +1,6 @@
 import van from "https://cdn.jsdelivr.net/gh/vanjs-org/van/public/van-1.5.2.min.js"
 
-const { button, div, input, span, p, img, hr } = van.tags
+const { button, div, input, span, p, img, hr, a } = van.tags
 
 const Website = () => {
     return div([
@@ -9,9 +9,16 @@ const Website = () => {
         Name(),
         Bio(),
         SocialMedia(),
-        Contact(),
-        Footer()
     ])
+}
+
+const Hr = () => {
+    const HrStyle = () => {
+        return `
+            width: 50%;
+        `
+    }
+    return hr({ style: HrStyle })
 }
 
 const TopBar = () => {
@@ -32,8 +39,8 @@ const TopBar = () => {
 
     return div({ style: TopBarStyle }, [
         div({ style: TopBarItemStyle }, span("Home")),
-        div({ style: TopBarItemStyle }, span("About")),
-        div({ style: TopBarItemStyle }, span("Contact")),
+        div({ style: TopBarItemStyle }, span("Notes")),
+        div({ style: TopBarItemStyle }, span("Blog")),
         div({ style: TopBarItemStyle }, span("Portfolio"))
     ])
 }
@@ -70,7 +77,7 @@ const Name = () => {
             flex-direction: column;
         `
     }
-    return div({style: NameStyle}, [
+    return div({ style: NameStyle }, [
         div("Me Asf"),
         div("Deepak മേച്ചേരി")
     ])
@@ -87,48 +94,72 @@ const Bio = () => {
             text-align: center;
         `
     }
-    const HrStyle = () => {
-        return `
-            width: 50%; /* Set the desired length */
-        `
-    }
-    return div({style: BioStyle}, [
+
+    return div({ style: BioStyle }, [
         p("Although I rarely match the vibes this picture gives off, I aspire to be this excited about life in general."),
-        hr({style: HrStyle}),
+        Hr(),
         p("This is where I should introduce myself and define who I am. Define... hmm... After quite some seconds of deliberation it dawns unto me that I cannot quite define myself 😕, so I'll write a haiku instead."),
-        hr({style: HrStyle}),
-        p("The eye that sees cannot see itself."),
-        p("Yet when it tries it sees,"),
-        p("All that it sees."),
-        hr({style: HrStyle}),
+        Hr(),
+        p("The eye cannot see"),
+        p("Itself, yet when it tries hard"),
+        p("It sees all it sees."),
+        Hr(),
         p("To be honest, after writing this I did end up thinking it's too corny. But as Buddha once said, \"Do not kill the part of you that is cringe, kill the part that cringes\"."),
-        hr({style: HrStyle})
+        Hr()
     ])
 }
 
 const SocialMedia = () => {
-    return div([
-        div([
-            span("Social Media")
+    const SocialMediaStyle = () => {
+        return `
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            flex-direction: row;
+        `
+    }
+
+    const ButtonStyle = () => {
+        return `
+            margin: 0 10px;
+        `
+    }
+
+    const LogoStyle = () => {
+        return `
+            width: 24px;
+            height: 24px;
+        `
+    }
+
+    return div({style: SocialMediaStyle}, [
+        div({style: ButtonStyle}, [
+            a({ href: "https://x.com/DeepakMecheri", target: "_blank" }, [
+                img({ src: "static/icons/twitter.png", alt: "Twitter", style: LogoStyle })
+            ])
+        ]),
+        div({style: ButtonStyle}, [
+            a({ href: "https://www.instagram.com/mecheri__/", target: "_blank" }, [
+                img({ src: "static/icons/instagram.png", alt: "Instagram", style: LogoStyle })
+            ])
+        ]),
+        div({style: ButtonStyle}, [
+            a({ href: "https://www.linkedin.com/in/deepak-mecheri/", target: "_blank" }, [
+                img({ src: "static/icons/linkedin.png", alt: "LinkedIn", style: LogoStyle })
+            ])
+        ]),
+        div({style: ButtonStyle}, [
+            a({ href: "https://github.com/deepakmecheri", target: "_blank" }, [
+                img({ src: "static/icons/github.png", alt: "GitHub", style: LogoStyle })
+            ])
+        ]),
+        div({style: ButtonStyle}, [
+            a({ href: "https://www.youtube.com/@nemooverdrive760", target: "_blank" }, [
+                img({ src: "static/icons/youtube.png", alt: "GitHub", style: LogoStyle })
+            ])
         ])
     ])
 }
-
-const Contact = () => {
-    return div([
-        div([
-            span("Contact")
-        ])
-    ])
-}
-
-const Footer = () => {
-    return div([
-        div([
-            span("Footer")
-        ])
-    ])
-}
-
 
 van.add(document.body, Website())
